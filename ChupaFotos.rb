@@ -86,16 +86,22 @@ class ChupaFotos
     # =========================================================
     
     def createDestinationFolder(album_title)
-      dst_folder = "."
       nomal_ac_dir = @account.gsub(/[^a-z0-9_]/i,"_")
       nomal_al_dir = album_title.gsub(/[^a-z0-9_]/i,"_")
-      if (!Dir.exists?(nomal_ac_dir))
-        Dir.mkdir(nomal_ac_dir)
-      end
-      dst_folder = "#{nomal_ac_dir}/#{nomal_al_dir}"
+      
+      dst_folder = "results"
       if (!Dir.exists?(dst_folder))
         Dir.mkdir(dst_folder)
       end
+      dst_folder = "#{dst_folder}/#{nomal_ac_dir}"
+      if (!Dir.exists?(dst_folder))
+        Dir.mkdir(dst_folder)
+      end
+      dst_folder = "#{dst_folder}/#{nomal_ac_dir}/#{nomal_al_dir}"
+      if (!Dir.exists?(dst_folder))
+        Dir.mkdir(dst_folder)
+      end
+      
       return dst_folder
     end
     
