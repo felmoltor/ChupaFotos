@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 require "#{File.dirname(__FILE__)}/ChupaFotos"
 require 'optparse'
-require 'colored'
 
 def parseOptions
     opts = {:account => "", :password => "", :browser => "firefox", :verbose => false}

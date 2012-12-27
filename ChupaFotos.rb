@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 require "watir"
 require "htmlentities"
 require "open-uri"
+require 'colored'
 
 class ChupaFotos
     attr_accessor :account, :password, :browser
@@ -97,7 +98,7 @@ class ChupaFotos
       if (!Dir.exists?(dst_folder))
         Dir.mkdir(dst_folder)
       end
-      dst_folder = "#{dst_folder}/#{nomal_ac_dir}/#{nomal_al_dir}"
+      dst_folder = "#{dst_folder}/#{nomal_al_dir}"
       if (!Dir.exists?(dst_folder))
         Dir.mkdir(dst_folder)
       end
@@ -147,8 +148,13 @@ class ChupaFotos
         if image_url.size > 0
           image_name = getImageName(image_url)
           # TODO: Threads to speedup de download process of the photos
-          open("#{dst_folder}/#{image_name}.jpg", 'wb') do |file|
-            file << open(image_url).read
+          begin
+            open("#{dst_folder}/#{image_name}.jpg", 'wb') do |file|
+              file << open(image_url).read
+            end
+          rescue OpenURI::HTTPError => e
+            puts "There was some error retrieving the photo in #{image_url}"
+            puts "Error: #{e.error}".red
           end
         end
         @watir.link(:id,"photo_action").click
