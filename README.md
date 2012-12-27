@@ -13,9 +13,10 @@ de acceder a tu perfil, explorar las carpetas de fotos existentes y descargarlas
 
 Posteriormente podrás cerrar la cuenta sin temor a perder ningúna foto de cuando eras kani y tenías una cuenta aquí.
 
-Algunas librerías necesarias:
-- mechanize (version utilizada 2.5.1)
-- nokogiri (versión utilizada 1.4.4)
+Algunas librerías necesarias (y las versiones con las que se ha comprobado su funcionamiento):
+- watir (4.0.2)
+- htmentities (4.3.1)
+- open-uri
 
 PD: Por supuesto, esta herramienta está pensada tan solo para que la utilizes con tu propia cuenta. 
     NO LA UTILIZES BAJO NINGÚN CONCEPTO CON CUENTAS DE OTRAS PERSONAS.
