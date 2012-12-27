@@ -52,11 +52,28 @@ def parseOptions
         raise OptionParser::MissingArgument if (opts[:account].nil? or opts[:account].size == 0)
         raise OptionParser::MissingArgument if (opts[:password].nil? or opts[:password].size == 0) 
     rescue OptionParser::ParseError
-        puts "Error with the options provided".color(:red)
+        puts "Error with the options provided".red
         puts parser
         exit
     end
     opts
+end
+
+def printAllAlbumsSummary(albums)
+  puts "==================================="
+  puts "====== #{albums.size} ALBUMS TO RETRIEVE ======="
+  puts "==================================="
+  puts
+  albums.each{|album|
+    n_photos_msg = "#{album['counter']} Photos"
+    msg_len = album['title'].size+n_photos_msg.size+7
+    puts "#"*msg_len
+    puts "# #{album['title']} (#{n_photos_msg.magenta}) #"
+    puts "#"*msg_len
+    puts
+  }
+  puts "================================="
+  puts
 end
 
 #######################
@@ -74,15 +91,27 @@ chupafotos.browser=options[:browser]
 
 puts "Login into Tuenti"
 if chupafotos.login
-    puts "Login successful for user '#{chupafotos.username}'".color(:green)
-    chupafotos.retrieveAllAlbumsInfo.each{|album|
-      puts "========== Downloading Album '#{album["title"]}' ========="
+    usrname = "#{chupafotos.username}".green
+    puts "Login successful for user '#{usrname}'"
+    
+    allAlbums = chupafotos.retrieveAllAlbumsInfo
+    printAllAlbumsSummary(allAlbums)
+    
+    allAlbums.each{|album|      
+      puts "===================="
+      puts "= NOW, DOWNLOADING =" 
+      puts "===================="
+      puts
+      print "=  "
+      print "#{album["title"]}".on_blue
+      print " = "
+      puts
       chupafotos.downloadAlbumPhotos(album_id=album["title"])
-      puts "================================================="
+      puts " ================================================="
       puts      
     }
 else
-    puts "There was some problem loging in. Check if the account/password is correct".color(:red)
+    puts "There was some problem loging in. Check if the account/password is correct".red
 end
 
 

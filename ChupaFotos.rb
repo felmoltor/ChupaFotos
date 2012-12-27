@@ -51,8 +51,7 @@ class ChupaFotos
     # =========================================================
     
     def isLoginSuccessful?
-        # Do we have some SID cookie assigned to us?
-        return (@watir.link(:id,"home_user_name").text.size > 0)
+        return !@watir.text.include?('Invalid email or password') # TODO: Is not working!
     end
     
     # =========================================================
@@ -118,16 +117,16 @@ class ChupaFotos
     # =========================================================
     
     def printProgression(n,total)
-      progression = ((n/total)*100.0).to_i
+      progression = ((n.to_f/total.to_f)*100.0).to_i
       if ((progression % 5) == 0 and progression != @@last_progression)
-        puts ""#{progression}%"
+        puts "#{progression}%"
         @@last_progression = progression        
       end
     end
     
     # =========================================================
     
-    def downloadAlbum(album_title)
+    def downloadAlbumByTitle(album_title)
       
       dst_folder = createDestinationFolder(album_title)
       
@@ -175,20 +174,11 @@ class ChupaFotos
     
     def retrieveAllAlbumsInfo
       @watir.goto("http://www.tuenti.com/?m=Albums&func=index")
-      puts "User has #{@watir.lis(:id,/photo_album_/).size} folders of photos"
       @watir.lis(:id,/photo_album_/).each {|album_li|
         photo_counter = album_li.span(:class,"counter").text.gsub(" Fotos","").to_i
         album_link = HTMLEntities.new.decode(album_li.a.href)
         album_title = album_li.a.title.strip
         album_id = album_li.id
-        puts "######################"
-        puts "# #{album_title} #"
-        puts "######################"
-        puts
-        puts "Link: #{album_id}"
-        puts "Link: #{album_link}"
-        puts "Counter #{photo_counter}"
-        puts
         @useralbums << { 
                           "id" => album_id,
                           "title" => album_title,
