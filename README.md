@@ -16,6 +16,7 @@ Posteriormente podrás cerrar la cuenta sin temor a perder ningúna foto de cuan
 Algunas librerías necesarias (y las versiones con las que se ha comprobado su funcionamiento):
 - watir (4.0.2)
 - htmentities (4.3.1)
+- colored (1.2)
 - open-uri
 
 PD: Por supuesto, esta herramienta está pensada tan solo para que la utilizes con tu propia cuenta. 

@@ -1,8 +1,25 @@
 #!/usr/bin/ruby 
 
+%w(
+Copyright (C) 2012  Felipe Molina (@felmoltor, felmoltor@gmail.com)
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+)
+
 require "#{File.dirname(__FILE__)}/ChupaFotos"
 require 'optparse'
-require 'logger'
+require 'colored'
 
 def parseOptions
     opts = {:account => "", :password => "", :browser => "firefox", :verbose => false}
@@ -35,7 +52,7 @@ def parseOptions
         raise OptionParser::MissingArgument if (opts[:account].nil? or opts[:account].size == 0)
         raise OptionParser::MissingArgument if (opts[:password].nil? or opts[:password].size == 0) 
     rescue OptionParser::ParseError
-        puts "Error with the options provided"
+        puts "Error with the options provided".color(:red)
         puts parser
         exit
     end
@@ -57,7 +74,7 @@ chupafotos.browser=options[:browser]
 
 puts "Login into Tuenti"
 if chupafotos.login
-    puts "Login successful for user '#{chupafotos.username}'"
+    puts "Login successful for user '#{chupafotos.username}'".color(:green)
     chupafotos.retrieveAllAlbumsInfo.each{|album|
       puts "========== Downloading Album '#{album["title"]}' ========="
       chupafotos.downloadAlbumPhotos(album_id=album["title"])
@@ -65,7 +82,7 @@ if chupafotos.login
       puts      
     }
 else
-    puts "There was some problem loging in. Check if the account/password is correct"
+    puts "There was some problem loging in. Check if the account/password is correct".color(:red)
 end
 
 
