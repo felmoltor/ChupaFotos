@@ -153,8 +153,12 @@ class ChupaFotos
               file << open(image_url).read
             end
           rescue OpenURI::HTTPError => e
-            puts "There was some error retrieving the photo in #{image_url}"
-            puts "Error: #{e.error}".red
+            if e.io.status[0].to_i == 404
+              puts "The image in #{image_url} can not be downloaded. It does not exists anymore (404)".red          
+            else
+              puts "There was some error retrieving the photo in #{image_url}".red
+              puts "Error: #{e.message}".red
+            end 
           end
         end
         @watir.link(:id,"photo_action").click
