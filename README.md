@@ -19,5 +19,5 @@ Algunas librerías necesarias (y las versiones con las que se ha comprobado su f
 - colored (1.2)
 - open-uri
 
-PD: Por supuesto, esta herramienta está pensada tan solo para que la utilizes con tu propia cuenta. 
+PD: Por supuesto, esta herramienta está pensada tan solo para que la utilices con tu propia cuenta. 
     NO LA UTILIZES BAJO NINGÚN CONCEPTO CON CUENTAS DE OTRAS PERSONAS.
