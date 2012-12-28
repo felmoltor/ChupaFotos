@@ -228,4 +228,18 @@ class ChupaFotos
         }
       end
     end
+    
+    # =========================================================
+    
+    def deleteAccount
+      @watir.goto("http://www.tuenti.com/#m=Settings&func=view_deactivate_account_page")
+      # Wait for tuenti to fully load the progress bar
+      waitForLoadingProcess
+      @watir.radio(:value,"8").set
+      @watir.textarea(:id,"txt_reason").value="El Chupacabras me obligo a hacerlo"
+      # @watir.button(:id,"deactivate_account_button").click
+    end
+    
+    # =========================================================
+    
 end
