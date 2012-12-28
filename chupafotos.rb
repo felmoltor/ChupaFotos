@@ -100,6 +100,8 @@ if chupafotos.login
       puts "===================="
       puts "= NOW, DOWNLOADING =" 
       puts "===================="
+      if album["title"] != "Fotos en las que salgo"
+     
       puts
       print "=  "
       print "#{album["title"]}".on_blue
@@ -108,6 +110,7 @@ if chupafotos.login
       chupafotos.downloadAlbumPhotos(album_id=album["title"])
       puts " ================================================="
       puts      
+      end
     }
 else
     puts "There was some problem loging in. Check if the account/password is correct".red

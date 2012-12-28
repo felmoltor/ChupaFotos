@@ -141,9 +141,11 @@ class ChupaFotos
       @watir.goto(@useralbums[useralbum_index]["href"])
       waitForLoadingProcess
       # Click on first photo of the album
-      @watir.ul(:class,"album").li(:id,/item_/).link.click
-      
-      @useralbums[useralbum_index]["counter"].times { |n_photo|
+      if @useralbums[useralbum_index]["counter"].to_i > 0
+        
+        @watir.ul(:class,"album").li(:id,/item_/).link.click
+        
+        @useralbums[useralbum_index]["counter"].times { |n_photo|
         image_url = @watir.imgs(:id,"photo_image")[0].src
         if image_url.size > 0
           image_name = getImageName(image_url)
@@ -161,9 +163,18 @@ class ChupaFotos
             end 
           end
         end
-        @watir.link(:id,"photo_action").click
+        begin
+          @watir.link(:id,"photo_action").click
+        rescue Selenium::WebDriver::Error::ElementNotVisibleError => e_not_visible
+          puts "Error: #{e_not_visible.message}".red
+          @watir.div(:id,"photo_pager").link(:class,"next").click
+        rescue e_other
+          puts "There was some problem finding the next photo link".red
+          puts "Error: #{e_other.message}".red
+        end
         printProgression(n_photo,@useralbums[useralbum_index]["counter"])
       }
+      end 
     end
     
     # =========================================================
