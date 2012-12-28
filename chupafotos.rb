@@ -85,8 +85,6 @@ chupafotos = ChupaFotos.new
 chupafotos.account=options[:account]
 chupafotos.password=options[:password]
 chupafotos.browser=options[:browser]
-        
-# m.log= Logger.new(STDOUT)
 
 puts "Login into Tuenti"
 if chupafotos.login
@@ -96,22 +94,21 @@ if chupafotos.login
     allAlbums = chupafotos.retrieveAllAlbumsInfo
     printAllAlbumsSummary(allAlbums)
     
+	puts "===================="
+	puts "= NOW, DOWNLOADING =" 
+	puts "===================="
+	puts
+
     allAlbums.each{|album|      
-      puts "===================="
-      puts "= NOW, DOWNLOADING =" 
-      puts "===================="
-      if album["title"] != "Fotos en las que salgo"
-     
-      puts
       print "=  "
       print "#{album["title"]}".on_blue
       print " = "
       puts
       chupafotos.downloadAlbumPhotos(album_id=album["title"])
-      puts " ================================================="
-      puts      
-      end
+      puts "="*(album["title"].size+4)
+      puts    
     }
+	puts "Now, you can safely delete your Tuenti account!".blue
 else
     puts "There was some problem loging in. Check if the account/password is correct".red
 end
