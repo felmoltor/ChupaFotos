@@ -5,7 +5,7 @@ Recorre todas las carpetas de una cuenta de Tuenti y descarga sus fotos. ¡Ya pu
 
 -------------
 
-Video de Uso de [Chupafotos]
+__Visita el video de uso de [Chupafotos]__
 
 ¿Cuantas veces has pensado en cerrar tu cuenta de Tuenti pero te da pereza ir foto por foto guardándola en tu disco duro?
 ¿Cuantas veces has entrado a Tuenti en los últimos 6 meses? ¿Una o ninguna?
