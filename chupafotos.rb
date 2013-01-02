@@ -110,7 +110,7 @@ if chupafotos.login
       puts    
     }
     
-	puts "Now, you can safely delete your Tuenti account!".blue
+	puts "Now, you can safely delete your Tuenti account! (-d option)".blue
 	puts
 	if (options[:delete])
 	  puts "You are about to unmercifully kill your Tuenti account".red

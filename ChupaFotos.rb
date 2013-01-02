@@ -237,7 +237,8 @@ class ChupaFotos
       waitForLoadingProcess
       @watir.radio(:value,"8").set
       @watir.textarea(:id,"txt_reason").value="El Chupacabras me obligo a hacerlo"
-      # @watir.button(:id,"deactivate_account_button").click
+      @watir.button(:id,"deactivate_account_button").click
+      @watir.button(:id,"dialog_button_confirmDialog_accept").click
     end
     
     # =========================================================
